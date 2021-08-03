@@ -13,6 +13,7 @@ import numpy as np
 import seaborn as sn
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.preprocessing import LabelEncoder
+from sklearn import metrics
 
 
 # Adding Color column based on class
@@ -35,9 +36,6 @@ def main():
     # Calculating the fetal state
     df["fetal state"] = df.apply(lambda row: calculate_fetal_state(row), axis=1)
 
-    print(df["fetal state"])
-    print("hello world")
-
     # ==================
     # Question #2
     # ==================
@@ -46,8 +44,6 @@ def main():
     x = df[["LB", "MLTV", "Width", "Variance"]]
     y = df["fetal state"]
 
-    print(x)
-
     # Splitting 50:50
     x_train, x_test, y_train, y_test = train_test_split(
         x, y, test_size=0.5, random_state=1, shuffle=True
@@ -55,6 +51,10 @@ def main():
 
     NB_classifier = MultinomialNB().fit(x_train, y_train)
     y_predict = NB_classifier.predict(x_test)
+
+    accuracy = metrics.accuracy_score(y_test, y_predict)
+
+    print(accuracy)
 
 
 main()

@@ -183,6 +183,14 @@ def main():
     tpr_rf = tp_rf / (tp_rf + fn_rf)
     tnr_rf = tn_rf / (tn_rf + fp_rf)
 
+    # ==================
+    # Question #5
+    # ==================
+    print("\n======================")
+    print("Question #5")
+    print("======================")
+
+    print("Table:\n")
     accuracy_table = pd.DataFrame(
         {
             "tp": [tp_nb, tp_dt, tp_rf],

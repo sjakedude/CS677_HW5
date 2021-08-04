@@ -141,6 +141,7 @@ def main():
     best_accuracy = 0
     best_depth = None
     best_n = None
+    error_rates = []
 
     for d in depths:
         for n in n_estimators:
@@ -155,6 +156,10 @@ def main():
                 best_accuracy = accuracy
                 best_depth = d
                 best_n = n
+            error_rate = 1 - accuracy
+            error_rates.append(error_rate)
+    plt.plot(error_rates)
+    plt.show()
     print("\nAccuracy: " + str(round((best_accuracy * 100), 2)) + "%")
     print("N=" + str(best_n))
     print("D=" + str(best_depth))

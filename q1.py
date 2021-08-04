@@ -13,7 +13,9 @@ import numpy as np
 import seaborn as sn
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import confusion_matrix
 from sklearn import metrics
+from sklearn import tree
 
 
 # Adding Color column based on class
@@ -39,6 +41,9 @@ def main():
     # ==================
     # Question #2
     # ==================
+    print("======================")
+    print("Question #2")
+    print("======================")
 
     # Separating into x and y
     x = df[["LB", "MLTV", "Width", "Variance"]]
@@ -54,7 +59,28 @@ def main():
 
     accuracy = metrics.accuracy_score(y_test, y_predict)
 
-    print(accuracy)
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_predict))
+
+    print("\nAccuracy: " + str(round((accuracy * 100), 2)) + "%")
+
+    # ==================
+    # Question #3
+    # ==================
+    print("\n======================")
+    print("Question #3")
+    print("======================")
+
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(x_train, y_train)
+    y_predict = clf.predict(x_test)
+
+    accuracy = metrics.accuracy_score(y_test, y_predict)
+
+    print("Confusion Matrix:")
+    print(confusion_matrix(y_test, y_predict))
+
+    print("\nAccuracy: " + str(round((accuracy * 100), 2)) + "%")
 
 
 main()
